@@ -1,0 +1,15 @@
+{
+  "name": "artillerytest",
+  "version": "1.0.0",
+  "description": "This is a test node project for testing the artillery testing framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"This is a test.\""
+  },
+  "author": "David O' Dwyer",
+  "license": "ISC",
+  "devDependencies": {
+    "artillery": "^2.0.0-18",
+    "artillery-plugin-expect": "^2.0.1"
+  }
+}

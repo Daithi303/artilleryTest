@@ -15,3 +15,7 @@ jobs:
         run: /home/node/artillery/bin/run run -q --environment functional ./load-test.yml
       - name: Execute Second load tests
         run: /home/node/artillery/bin/run run -q --environment functional ./second-load-test.yml
+  Cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "this is the cleanup Job"

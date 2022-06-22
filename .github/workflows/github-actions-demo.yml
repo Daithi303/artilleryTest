@@ -21,7 +21,8 @@ jobs:
       - name: Execute Second load tests
         run: /home/node/artillery/bin/run run -q --environment functional ./second-load-test.yml
   Cleanup:
-    needs: Artillery
+    if: ${{ always() }}
+    needs: [Seeding, Artillery]
     runs-on: ubuntu-latest
     steps:
       - run: echo "this is the cleanup Job"

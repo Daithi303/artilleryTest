@@ -1,0 +1,36 @@
+config:
+  target: "https://bidder-staging.dev.pegasus.kargo.com"
+  environments:
+    #
+    # This is our load testing profile, where we create a lot of virtual users.
+    # Note that we don't load the plugin here, so that we don't see the output
+    # from the plugin.
+    #
+    load:
+      tls:
+        rejectUnauthorized: false
+      phases:
+        - duration: 600
+          arrivalRate: 10
+    #
+    # This is our functional testing profile, with a single virtual user, and
+    # the plugin enabled.
+    #
+    functional:
+      tls:
+        rejectUnauthorized: false
+      phases:
+        - duration: 1
+          arrivalCount: 1
+      processor: "./processor.js"
+      plugins:
+        expect: {}
+scenarios:
+  - name: Get Ad
+    flow:
+      - log: "Second new virtual user running"
+      - get:
+          url: "/_health"
+          afterResponse: "afterResponseHandler"
+          expect:
+            - statusCode: 200

@@ -8,8 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     container: artilleryio/artillery:latest
     steps:
-      - name: Checkout repository
+      - name: CheckoÍut repository
         uses: actions/checkout@v3
 
-      - name: Execute load tests
+      - name: Execute load test
         run: /home/node/artillery/bin/run run -q --environment functional ./load-test.yml
+      - name: Execute Second load tests
+        run: /home/node/artillery/bin/run run -q --environment functional ./second-load-test.yml

@@ -18,14 +18,12 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  artillery:
+  Artillery:
     runs-on: ubuntu-latest
-
     container: artilleryio/artillery:latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Execute load tests
         run: /home/node/artillery/bin/artillery run -q --environment functional ./load-test.yml

@@ -33,4 +33,4 @@ scenarios:
           url: "/_health"
           afterResponse: "afterResponseHandler"
           expect:
-            - statusCode: 304
+            - statusCode: 200

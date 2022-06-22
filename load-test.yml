@@ -33,4 +33,4 @@ scenarios:
           url: "/"
           afterResponse: "afterResponseHandler"
           expect:
-            - statusCode: 200
+            - statusCode: 304

@@ -1,5 +1,5 @@
 config:
-  target: "https://mgmt-staging.dev.pegasus.kargo.com"
+  target: "https://example.com"
   environments:
     #
     # This is our load testing profile, where we create a lot of virtual users.
@@ -28,16 +28,9 @@ config:
 scenarios:
   - name: Get Ad
     flow:
+      - log: "New virtual user running"
       - get:
-          url: "/api/v1/ads?query=&page=0&size=9999"
-          capture:
-            - json: "$.length"
-              as: "adArrayLength"
+          url: "/"
           afterResponse: "afterResponseHandler"
-          headers:
-            Authorization: 'Bearer eyJraWQiOiJ0ZmVuclo4ZFlNbGJqTlBGMDM0dkZ0NzMtVWg5Zi1SSTd4UV9VTHV0VlhvIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULm9zdTVVajBLa3JEdTJhR2NqQ2FDdmNGR3RxMzVSbE94SlFfY0dUOE50YlkiLCJpc3MiOiJodHRwczovL2F1dGgtZGV2LmthcmdvLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2NTU4MjA3MzYsImV4cCI6MTY1NTgyNDMzNiwiY2lkIjoiMG9hMjF6emQ2Y25OczIwMFoxZDciLCJ1aWQiOiIwMHUza2xyazFxZ0lYRlpKMzFkNyIsInNjcCI6WyJlbWFpbCIsInByb2ZpbGUiLCJvcGVuaWQiXSwiYXV0aF90aW1lIjoxNjU1MjIyMzk3LCJzdWIiOiJkb2R3eWVyQGthcmdvLmNvbSJ9.wtYYlOG0PTHkON51s3a2nwRHdqYjGdgcVH9iQBbmHZ_wgtYyXckWZMffn7bHqekYyRngMX15YEKVzAjq3gehamVZ1CL8g2On276MsWe7vMn6kqaTlgQ9B3sM63m1nEPAL2ogHwcsmRM_H8Hh64uiDYxyDbLSJ65JNJUftrfn3lVMswfxqCNhAXBw02ePANov7HlBlFXGN1AkoLUKkrnhhwYE1y5VW1QTX1ndlyb3FpvJnks-DAXavm-YZH9ZQv4pb9P7cJ_hsF3fP6v1OYMjvrLMfg_rYaSdXMh375zM3xAJAKn8J4e7H_rdmkQMDJB7mZ3hyBpl1jRErvcuvd_DFg'
           expect:
             - statusCode: 200
-            - equals:
-              - 228
-              - "{{ adArrayLength }}"

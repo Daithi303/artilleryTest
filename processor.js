@@ -6,9 +6,10 @@ module.exports = {
     },
     afterResponseHandler (requestParams, response, context, ee, next) {
         // add a length field to the response body
-        body=JSON.parse(response.body);
+        // body=JSON.parse(response.body);
     //    console.log(`response body : ${response.body}`)
-       console.log(`response body length : ${body.length}`)
+    //    console.log(`response body length : ${body.length}`)
+    console.log(`this is the afterResponseHandler`)
       return next() // Must be called for the scenario to continue
     }
   }

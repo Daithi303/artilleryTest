@@ -4,6 +4,16 @@ on:
     branches:
       - master
 jobs:
+  Wait-For-ready:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait-For-Ready_200-OK
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: 'https://shrouded-eyrie-09530.herokuapp.com/_health'
+          responseCode: 200
+          timeout: 20000
+          interval: 1000
   Seeding:
     runs-on: ubuntu-latest
     steps:

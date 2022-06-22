@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  Wait-For-ready:
+  Wait-For-Ready:
     runs-on: ubuntu-latest
     steps:
       - name: Wait-For-Ready_200-OK
@@ -15,6 +15,7 @@ jobs:
           timeout: 20000
           interval: 1000
   Seeding:
+    needs: Wait-For-Ready
     runs-on: ubuntu-latest
     steps:
       - run: echo "this is the seeding Job"
@@ -25,14 +26,13 @@ jobs:
     steps:
       - name: CheckoÍut repository
         uses: actions/checkout@v3
-
       - name: Execute load test
         run: /home/node/artillery/bin/run run -q --environment functional ./load-test.yml
       - name: Execute Second load tests
         run: /home/node/artillery/bin/run run -q --environment functional ./second-load-test.yml
   Cleanup:
     if: ${{ always() }}
-    needs: [Seeding, Artillery]
+    needs: [Seeding, Artillery, Wait-For-ready]
     runs-on: ubuntu-latest
     steps:
       - run: echo "this is the cleanup Job"
